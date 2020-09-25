@@ -1,0 +1,142 @@
+Lab-0A:
+
+console.log('Freddy Guo');
+console.log('My favorite color is blue.');
+console.log('My favorite song is Glorious.');
+console.log('My favorite tv program is the NBA.');
+console.log('My favorite food is pizza.');
+
+
+Lab-0B:
+
+console.log("2 + 8 - 5");
+console.log(2 + 8 - 5);
+
+                 
+console.log("2 * 8 - 5");
+console.log(2 * 8 - 5);
+
+                 
+console.log("2 * 8 / 4");
+console.log(2 * 8 / 4);
+
+
+Lab-1:
+
+console.log('\nWelcome\n\n')
+
+const readline = require('readline-sync');
+
+let name = readline.question("Enter your first name: ");
+
+console.log("Welcome " + name + "!");
+
+
+Lab-2:
+
+console.log('\nWelcome\n\n')
+const readline = require('readline-sync');
+
+let name = readline.question("Enter your first name: ");
+let lastName = readline.question("Enter your last name: ");
+
+console.log(`Welcome, ${name} ${lastName}!`)
+
+
+Lab-3 
+
+console.log("\nArea of a Rectangle\n\n");
+const readline = require('readline-sync');
+let length = readline.question("Enter the length of a rectangle: ");
+let width = readline.question("Enter the width of a rectangle: ");
+
+let area = length * width;
+
+console.log(`The area is ${area} square units.`)
+
+
+Lab-4:
+
+console.log("\nArea of a Circle\n\n");
+const readline = require('readline-sync');
+let rad = readline.question("Enter the radius of a circle: ");
+
+let area = rad * rad * Math.PI;
+
+console.log(`The area of the circle is ${area} square units.`)
+
+
+Lab-5:
+
+console.log("\nFahrenheit to Celcius\n\n");
+const readline = require('readline-sync');
+let fah = readline.question("Enter the Fahrenheit temperature: ");
+
+let cel = (5/9) * (fah - 32);
+
+console.log(`The Celsius temperature is ${cel} degrees.`);
+
+
+Lab-6:
+
+console.log("\nSurface Area of a Cube\n\n");
+const readline = require('readline-sync');
+let side = readline.question("Enter the length of one side: ");
+
+let surfaceArea = 6 * side * side;
+
+console.log(`The area of the circle is ${surfaceArea} square units.`)
+
+
+Lab-7A:
+
+console.log("\nBattign Average\n\n");
+const readline = require('readline-sync');
+let hits = Number(readline.question("Enter the number of hits: "));
+let bats = Number(readline.question("Enter the number of at bats: "));
+let walks = Number(readline.question("Enter the number of walks: "));
+
+let battingAvg = hits/bats;
+let onBasePCT = (hits + walks) / (bats + walks);
+
+console.log(`The user's batting average is ${battingAvg}.`)
+console.log(`The user's on base average is ${onBasePCT}.`)
+
+Lab-7B:
+
+console.log("\nThrowing Percentage\n\n");
+const readline = require('readline-sync');
+let completed = Number(readline.question("Enter the number of passes completed: "));
+let thrown = Number(readline.question("Enter the number of passes thrown: "));
+
+let throwingPCT = completed/thrown;
+
+console.log(`The throwing percentage is ${throwingPCT}.`)
+
+
+Lab-7C:
+
+console.log("\nWinning Percentage\n\n");
+const readline = require('readline-sync');
+let wins = Number(readline.question("Enter the number of wins: "));
+let losses = Number(readline.question("Enter the number of losses: "));
+
+
+let winningPCT = (wins) / (wins + losses);
+
+console.log(`The winning percentage is ${winningPCT}.`);
+
+
+Lab-7D:
+
+console.log("\nSlope of a Line\n\n");
+const readline = require('readline-sync');
+let x1 = Number(readline.question("Enter the value for x1: "));
+let y1 = Number(readline.question("Enter the value for y1: "));
+console.log("\n");
+let x2 = Number(readline.question("Enter the value for x2: "));
+let y2 = Number(readline.question("Enter the value for y2: "));
+
+let slope = (y2 - y1) / (x2 - x1);
+
+console.log(`\nThe slope of the line is ${slope}.`)

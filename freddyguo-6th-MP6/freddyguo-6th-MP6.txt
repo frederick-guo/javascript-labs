@@ -1,0 +1,222 @@
+Lab-8:
+
+console.log("\nLetter Grades\n\n");
+const readline = require('readline-sync');
+let grade = Number(readline.question("Enter the numerical grade: "));
+
+console.log("\n");
+
+if(grade >= 95){
+    console.log(`\nThe letter grade is A.`)
+}
+else if(grade >= 87 && grade <= 94){
+    console.log(`The letter grade is B`)
+}
+else if(grade >= 75 && grade <= 86){
+    console.log(`The letter grade is C`)
+}
+else if(grade >= 70 && grade <= 74){
+    console.log(`The letter grade is D`)
+}
+else{
+    console.log(`The letter grade is F`)
+}
+
+
+Lab-9: 
+
+console.log("\nPositive or Negative or Zero\n\n");
+const readline = require('readline-sync');
+let num = Number(readline.question("Enter a number: "));
+
+console.log("\n");
+
+if(num > 0){
+    console.log(`${num} is a positive number`)
+}
+else if(num < 0){
+    console.log(`${num} is a negative number`)
+}
+else{
+    console.log(`${num} is zero`)
+}
+
+
+Lab-10:
+
+console.log("\nMultiplication Table\n");
+const readline = require('readline-sync');
+
+let num = Number(readline.question("Enter a number (0 - 9): "));
+
+for(let i = 1; i <= 9; i++){
+    let answer = num * i;
+    console.log(`${num} x ${i} = ${answer}`);
+}
+
+
+Lab-11:
+
+console.log("\nThe Guessing Game\n");
+const readline = require('readline-sync');
+
+
+let low = 1;
+let high = 100;
+
+let number = Math.floor(Math.random() * 100) + 1;
+let userGuess = 0;
+let numTries = 1;
+
+
+
+
+while (numTries <= 7){
+    console.log(`low = ${low} high = ${high}\n`)
+    userGuess = Number(readline.question("Enter your guess: "));
+
+    if(number === userGuess){
+        break;
+    }
+    else if(userGuess < number){
+        console.log("Your number is too low!");
+        low = userGuess + 1;
+    }
+    else{
+        console.log("Your number is too high!");
+        high = userGuess - 1;
+    }
+    numTries += 1;
+}
+
+if(userGuess === number){
+    console.log("You guess the number!!!")
+}
+else{
+    console.log(`You lose. The number was ${number}`)
+}
+
+
+Lab-12:
+
+console.log("\nThe Dice Game\n");
+const readline = require('readline-sync');
+
+let wins = 0;
+let losses = 0;
+
+
+let play = (readline.question("Are you ready to toss the dice (Yes or No)? "));
+
+while (play === 'y'){
+    let die1 = Math.floor(Math.random() * 6) + 1;
+    let die2 = Math.floor(Math.random() * 6) + 1;
+    console.log(die1 + " " + die2);
+    let sum = die1 + die2;
+    if(sum === 7 || sum === 11){
+        console.log(`You tossed a ${sum}. You win!`)
+        wins++;
+    }
+    else{
+        console.log(`You tossed a ${sum}. You lose!`)
+        losses++;
+    }
+    play = (readline.question("Are you ready to toss the dice (Yes or No)? "));
+}
+
+console.log(`Wins: ${wins}`);
+console.log(`Losses: ${losses}`);
+console.log(`Thank you for playing dice!!!`);
+
+
+Lab-13:
+
+console.log("\nThe Factors of a Number\n");
+const readline = require('readline-sync');
+
+
+
+let num = Number(readline.question("Enter a number: "));
+let list = [];
+for(let i = 1; i <= num; i++){
+    if(num % i === 0){
+        list.push(i);
+    }
+}
+
+let listString = "";
+for(let i = 0; i < list.length; i++){
+    listString = `${listString} ${list[i]} `;
+}
+
+console.log(`The factors of ${num} are:${listString}`);
+
+
+Lab-14:
+
+console.log("\nThe Factors of a Number\n");
+const readline = require('readline-sync');
+
+
+
+let num = Number(readline.question("Enter a number: "));
+let list = [];
+let count = 0;
+for(let i = 1; i <= num; i++){
+    if(num % i === 0){
+        list.push(i);
+        count++;
+    }
+}
+
+let listString = "";
+for(let i = 0; i < list.length; i++){
+    listString = `${listString} ${list[i]} `;
+}
+
+console.log(`The factors of ${num} are:${listString}`);
+console.log(`There are ${count} factors.`)
+
+
+Lab-15:
+
+console.log("\nThe GCF of Two Numbers\n");
+const readline = require('readline-sync');
+
+
+let num1 = Number(readline.question("Enter the first number: "));
+let num2 = Number(readline.question("Enter the second number: "));
+if(num1 != 0 && num2 != 0){
+    while(num1 != 0 && num2 != 0){
+        let list1 = [];
+        for(let i = 1; i <= num1; i++){
+            if(num1 % i === 0){
+                list1.push(i);
+            }
+        }
+       
+        let list2 = [];
+        for(let i = 1; i <= num2; i++){
+            if(num2 % i === 0){
+                list2.push(i);
+            }
+        }
+        
+        let gcf = 1;
+        for(let i = 0; i < list1.length; i++){
+            if(list2.includes(list1[i]) && (list1[i] > gcf)){
+                gcf = list1[i];
+            }
+        }
+        console.log(`The GCF of ${num1} and ${num2} is ${gcf}`)
+        num1 = Number(readline.question("Enter the first number: "));
+        if(num1 === 0){
+            break;
+        }
+        num2 = Number(readline.question("Enter the second number: "));
+        
+        
+    }
+}
+
+console.log(`Goodbye!`);

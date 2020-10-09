@@ -1,0 +1,224 @@
+Lab-16:
+
+console.log("\nThe GCF of Two Numbers\n");
+const readline = require('readline-sync');
+
+let n1 = Number(readline.question("Enter the first number: "));
+let n2 = Number(readline.question("Enter the second number: "));
+
+if(n1 != 0 && n2 != 0){
+    while(n1 != 0 && n2 != 0){
+        gcf(n1, n2)
+    
+    n1 = Number(readline.question("Enter the first number: "));
+    if(n1 === 0){
+        console.log(`Goodbye!`);
+        return
+    }
+    n2 = Number(readline.question("Enter the second number: "));
+}
+}
+
+console.log(`Goodbye!`);
+
+
+
+function gcf(num1, num2){
+
+    let list1 = [];
+    for(let i = 1; i <= num1; i++){
+        if(num1 % i === 0){
+            list1.push(i);
+            }
+        }
+           
+    let list2 = [];
+    for(let i = 1; i <= num2; i++){
+        if(num2 % i === 0){
+            list2.push(i);
+        }
+    }
+            
+    let gcf = 1;
+        for(let i = 0; i < list1.length; i++){
+        if(list2.includes(list1[i]) && (list1[i] > gcf)){
+            gcf = list1[i];
+        }
+    }
+    console.log(`The GCF of ${num1} and ${num2} is ${gcf}`)
+            
+            
+}
+
+
+Lab-17:
+
+console.log("\nThe Sum of the Digits for a Number\n");
+const readline = require('readline-sync');
+
+let notZero = true;
+
+while(notZero){
+    let number = Number(readline.question("Enter a number: "));
+    if(number === 0){
+        console.log(`Goodbye!`)
+        break;
+    }
+    let sumofDigits = sum(number);
+    console.log(`The sum of the digits of ${number} is ${sumofDigits}`)
+}
+
+
+
+
+
+function sum(num){
+
+    if(num === 0){
+        return 0;
+    }
+    if(num < 0){
+        num = Math.abs(num);
+    }
+    let sum = 0;
+    while(num > 0){
+        let rightDigit = num % 10
+        sum = sum + rightDigit
+        num = Math.floor(num / 10)
+    }
+    return sum;
+            
+            
+}
+
+
+Lab-18:
+
+console.log("\nThe Vowels in a String\n");
+const readline = require('readline-sync');
+
+
+let word = (readline.question("Enter a String: "));
+
+if(word != ''){
+    while(word != ''){
+        let vowels = '';
+        for(let i = 0; i < word.length; i++){
+            if(word.substring(i, i+1) === "a" || word.substring(i, i+1) === "e" || word.substring(i, i+1) === "i" || word.substring(i, i+1) === "o" || word.substring(i, i+1) === "u"){
+            vowels = vowels + word.substring(i, i+1);
+            }
+        }
+        console.log(`The vowels of ${word} are: ${vowels}`);
+        word = (readline.question("Enter a String: "));
+    }
+    
+}
+
+console.log(`Goodbye!`);
+
+
+Lab-19:
+
+console.log("\nThe Capital Letters in a String\n");
+const readline = require('readline-sync');
+
+
+let word = (readline.question("Enter a String: "));
+
+if(word != ''){
+    while(word != ''){
+        let capLetters = '';
+        for(let i = 0; i < word.length; i++){
+            let letter = word.charAt(i);
+            if(letter >= 'A' && letter <= 'Z'){
+            capLetters = capLetters + word.substring(i, i+1);
+            }
+        }
+        console.log(`The capital letters of ${word} are: ${capLetters}`);
+        word = (readline.question("Enter a String: "));
+    }
+    
+}
+
+console.log(`Goodbye!`);
+
+
+Lab-20:
+
+console.log("\nPrime Numbers\n\n");
+const readline = require('readline-sync');
+
+
+let number = Number(readline.question("Enter a number: "));
+
+if(number != 0){
+    while(number != 0){
+        let prime = isPrime(number);
+        if(prime){
+            console.log(`${number} is prime.`)
+        }
+        else{
+            console.log(`${number} is NOT prime.`)
+        }
+        
+        number = Number(readline.question("Enter a number: "));
+    }
+    
+}
+
+console.log(`Goodbye!`);
+
+function isPrime(num){
+    let count = 0;
+        for(let i = 1; i <= number; i++){
+            if(number % i === 0){
+                count++;
+            }
+        }
+        if(count === 2){
+            return true;
+        }
+        else{
+            return false;
+        }
+}
+
+
+Lab-21:
+
+console.log("\nPerfect Numbers\n\n");
+const readline = require('readline-sync');
+
+
+let num = Number(readline.question("Enter a number: "));
+
+if(num != 0){
+    while(num != 0 ){
+        let perfect = isPerfect(num);
+        if(perfect){
+            console.log(`${num} is perfect.`)
+        }
+        else{
+            console.log(`${num} is NOT perfect.`)
+        }
+        num = Number(readline.question("Enter a number: "));
+    }
+}
+
+console.log(`Goodbye!`);
+
+function isPerfect(number){
+        let sum = 0;
+        for(let i = 1; i < number; i++){
+            if(number % i === 0){
+                sum += i;
+            }
+        }
+        if(sum === number){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+}

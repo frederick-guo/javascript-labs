@@ -1,0 +1,203 @@
+Lab-22:
+
+console.log("\nBinary Numbers\n\n");
+const readline = require('readline-sync');
+
+
+let num = Number(readline.question("Enter a number to convert into binary: "));
+
+if(num != 0){
+    while(num != 0 ){
+        let binary = bin(num);
+        console.log(`The number ${num} in binary form is ${binary}`)
+        num = Number(readline.question("Enter a number to convert into binary: "));
+    }
+}
+
+console.log(`Goodbye!`);
+
+
+function bin(num){
+        return num.toString(2);
+}
+
+
+Lab-23:
+
+console.log("\nBase Eight Numbers\n\n");
+const readline = require('readline-sync');
+
+
+let num = Number(readline.question("Enter a number: "));
+
+if(num != 0){
+    while(num != 0 ){
+        let baseEight = oct(num);
+        console.log(`The number ${num} in base 8 is ${baseEight}`)
+        num = Number(readline.question("Enter a number: "));
+    }
+}
+
+console.log(`Goodbye!`);
+
+
+function oct(num){
+        return num.toString(8);
+}
+
+
+Lab-24:
+
+console.log("\nBase Sixteen (Hex) Numbers\n\n");
+const readline = require('readline-sync');
+
+
+let num = Number(readline.question("Enter a number: "));
+
+if(num != 0){
+    while(num != 0 ){
+        let baseSixteen = hex(num);
+        console.log(`The number ${num} in base 16 is ${baseSixteen}`)
+        num = Number(readline.question("Enter a number: "));
+    }
+}
+
+console.log(`Goodbye!`);
+
+
+function hex(num){
+        return num.toString(16);
+}
+
+
+Lab-25:
+
+console.log("\nEncryption\n\n");
+const readline = require('readline-sync');
+
+
+let msg = (readline.question("Enter a message: "));
+
+if(msg != ''){
+    while(msg != '' ){
+        let encryptedMsg = encrypt(msg);
+        console.log(`${msg} encrypted is ${encryptedMsg}`)
+        msg = (readline.question("Enter a message: "));
+    }
+}
+
+console.log(`Goodbye!`);
+
+
+function encrypt(msg){
+    let encryptString = '';
+    for(let i = 0; i < msg.length; i++){
+        var ch = msg.charCodeAt(i);
+        
+        if(i % 2 === 0){
+            ch += 4;
+        }
+        else{
+            ch += 7;
+        }
+        
+        let x = String.fromCharCode(ch);
+        encryptString = encryptString + x;
+
+
+    }
+        return encryptString;
+}
+
+
+Lab-26:
+
+console.log("\nEncryption\n\n");
+const readline = require('readline-sync');
+
+
+let msg = (readline.question("Enter a message: "));
+
+if(msg != ''){
+    while(msg != '' ){
+        let decryptedMsg = decrypt(msg);
+        console.log(`${msg} decrypted is ${decryptedMsg}`)
+        msg = (readline.question("Enter a message: "));
+    }
+}
+
+console.log(`Goodbye!`);
+
+
+function decrypt(msg){
+    let decryptString = '';
+    for(let i = 0; i < msg.length; i++){
+        var ch = msg.charCodeAt(i);
+        
+        if(i % 2 === 0){
+            ch -= 4;
+        }
+        else{
+            ch -= 7;
+        }
+        
+        let x = String.fromCharCode(ch);
+        decryptString = decryptString + x;
+
+
+    }
+        return decryptString;
+}
+
+
+Lab-27:
+
+console.log("\nLargest Number\n");
+
+function findLargest (array){
+    let largest = array[0]
+    for(let i = 1; i < array.length; i++){
+        if(array[i] > largest){
+            largest = array[i];
+        }
+    }
+    return largest;
+}
+
+let one = [12,3,6,8,14,12,1]
+let two = [1,2,8,4,9,6,6,8,2]
+
+let largestOfOne = findLargest(one)
+
+console.log(`The largest number of array one is ${largestOfOne}\n`);
+
+let largestOfTwo = findLargest(two)
+
+console.log(`The largest number of array two is ${largestOfTwo}\n`);
+
+
+
+Lab-28: 
+
+console.log("\nEven Numbers\n");
+
+function countEvens (array){
+    let count = 0;
+    for(let i = 0; i < array.length; i++){
+        if(array[i] % 2 === 0){
+            count++;
+        }
+    }
+    return count;
+}
+
+let one = [12,3,6,8,14,12,1]
+let two = [1,2,8,4,9,6,6,8,2]
+
+let numberOfEvensOne = countEvens(one)
+
+console.log(`The number of even numbers in array one is ${numberOfEvensOne}\n`);
+
+let numberOfEvensTwo = countEvens(two)
+
+console.log(`The number of even numbers in array two is ${numberOfEvensTwo}\n`);

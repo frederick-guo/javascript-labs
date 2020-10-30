@@ -1,0 +1,152 @@
+Lab-35:
+
+class Student{
+
+    constructor(firstName, lastName, q1, q2){
+        this.firstName = firstName
+        this.lastName = lastName
+        this.q1 = q1
+        this.q2 = q2
+        this.average = (q1 + q2) / 2
+    }
+    getFirstNameLastName(){
+        return this.firstName + " " + this.lastName;
+    }
+}
+
+function printStudents (students){
+    for(let i = 0; i < students.length; i++){
+        console.log(`${students[i].getFirstNameLastName()} ${students[i].q1} ${students[i].q2} ${students[i].average}`)
+    }
+}
+
+function findTheStudentWithTheHighesAverage(students){
+    let studentWithHighestAverage = students[0]
+
+    for(let i = 1; i < students.length; i++){
+        if (students[i].average > studentWithHighestAverage.average){
+            studentWithHighestAverage = students[i]
+        }
+    }
+
+    return studentWithHighestAverage;
+}
+
+const readline = require('readline-sync');
+
+students = [];
+
+while(true){
+    firstName = readline.question("\nEnter the person's first name: ")
+    if(firstName === ''){
+        break;
+    }
+
+    lastName = readline.question("Enter the person's last name: ")
+
+    q1 = Number(readline.question("Enter the student's q1 grade: "))
+    q2 = Number(readline.question("Enter the student's q2 grade: "))
+
+    student = new Student(firstName,lastName, q1, q2);
+    students.push(student);
+}
+
+console.log('\nList of Students: \n');
+
+printStudents(students);
+
+//I'm not sure if there's a function for javascript that can replicate "attrgetter" for python
+
+console.log('\nStudent with the Highest Average: ')
+
+console.log(findTheStudentWithTheHighesAverage(students).firstName + ' ' + findTheStudentWithTheHighesAverage(students).lastName);
+
+
+
+
+Lab-36:
+
+class Item{
+
+    constructor(barcode, itemName, price, inventory, taxRate){
+        this.barcode = barcode
+        this.itemName = itemName
+        this.price = price
+        this.inventory = inventory
+        this.taxRate = taxRate
+    }
+    getTaxOnItem(){
+        return this.taxRate * this.price;
+    }
+
+}
+
+
+function searchForItemByBarcode (items, barcode){
+    for(let i = 0; i < items.length; i++){
+        if(items[i].barcode === barcode){
+            return items[i];
+        }
+    }
+    return '';
+}
+
+function printItems(items){
+    for(let i = 0; i < items.length; i++){
+        console.log(items[i].itemName + " " + items[i].price + " " + items[i].getTaxOnItem())
+        if(items[i].inventory < 5){
+            console.log('Low Inventory: Only ' + items[i].inventory + 'left')
+        }
+        console.log('\n')
+    }
+}
+
+
+
+items = [];
+
+let item = new Item("78645", "Bread", 3.99, 55, 0.0825)
+items.push(item)
+    
+item = new Item("79644", "Campbell's Vegetable Soup 8 oz", 2.49, 3, 0.0825)
+items.push(item)
+    
+item = new Item("79645", "Amy's Vegetable Soup 8 oz", 2.37, 2, 0.0825)
+items.push(item)
+
+item = new Item("79688", "Amy's Vegetable Soup 12 oz", 3.49, 12, 0.0825)
+items.push(item)
+
+console.log('\nList of Items: \n');
+
+printItems(items);
+
+
+let itemsToBuy = ["78645", "79645"];
+
+
+let totalCost = 0.0;
+let totalTax = 0.0;
+
+
+for(let i = 0; i < itemsToBuy.length; i++){
+    let itemWithBarcode = searchForItemByBarcode(items, itemsToBuy[i])
+    if(itemWithBarcode === null){
+        console.log("null")
+    }
+    else{
+        totalCost += itemWithBarcode.price;
+
+    totalTax += itemWithBarcode.getTaxOnItem();
+    }
+}
+
+let finalBill = totalCost + totalTax
+
+console.log('Total Cost: ' + totalCost)
+
+console.log('Total Tax: ' + totalTax)
+
+console.log('Final Bill: ' + finalBill)
+
+console.log('\nThank you for shopping at The Best Store')

@@ -1,0 +1,157 @@
+Lab-37:
+
+class DriversRecord{
+
+    constructor(license, name, licensePlate){
+        this.license = license
+        this.name = name
+        this.licensePlate = licensePlate
+    }
+
+}
+
+
+let drivers = [];
+
+let driver = new DriversRecord("677892456", "Fred Baker", "AB7864")
+drivers.push(driver)
+
+driver = new DriversRecord("446391466", "Johnny Appleseed", "JT7234")
+drivers.push(driver)
+
+driver = new DriversRecord("697861537", "Luke Skywalker", "PU9165")
+drivers.push(driver)
+
+driver = new DriversRecord("273598933", "Indiana Jones", "RW2859")
+drivers.push(driver)
+
+
+const readline = require('readline-sync');
+
+let licenseToFind = readline.question("\nWhat's the license of the driver you want to find? ")
+
+let theDriver = ''
+
+let found = false
+
+let driverRecord = drivers[0]
+
+for(let i = 0; i < drivers.length; i++){
+    if(licenseToFind === drivers[i].license){
+        theDriver = drivers[i].name
+        found = true
+        driverRecord = drivers[i]
+    }
+}
+
+console.log('\n')
+if(found){
+    console.log(driverRecord.license + ' ' + driverRecord.name + ' ' + driverRecord.licensePlate + '\n')
+}
+else{
+    console.log('License not found\n')
+}
+
+
+
+Lab-38:
+
+class DriversRecord{
+
+    constructor(license, name, licensePlate, points){
+        this.license = license
+        this.name = name
+        this.licensePlate = licensePlate
+        this.points = points
+    }
+
+}
+
+
+let drivers = [];
+
+let driver = new DriversRecord("677892456", "Fred Baker", "AB7864", 5)
+drivers.push(driver)
+
+driver = new DriversRecord("446391466", "Johnny Appleseed", "JT7234", 1)
+drivers.push(driver)
+
+driver = new DriversRecord("697861537", "Luke Skywalker", "PU9165", 10)
+drivers.push(driver)
+
+driver = new DriversRecord("273598933", "Indiana Jones", "RW2859", 12)
+drivers.push(driver)
+
+
+const readline = require('readline-sync');
+
+let licenseToFind = readline.question("\nWhat's the license of the driver you want to find? ")
+
+let theDriver = ''
+
+let found = false
+
+let driverRecord = drivers[0]
+
+for(let i = 0; i < drivers.length; i++){
+    if(licenseToFind === drivers[i].license){
+        theDriver = drivers[i].name
+        found = true
+        driverRecord = drivers[i]
+    }
+}
+
+console.log('\n')
+if(found){
+    console.log(driverRecord.license + ' ' + driverRecord.name + ' ' + driverRecord.licensePlate + ' Points: ' + driverRecord.points + '\n')
+    if(driverRecord.points > 10){
+        console.log('Your license has been suspended.\n')
+    }
+}
+else{
+    console.log('License not found\n')
+}
+
+
+
+Lab-39:
+
+class GameScore{
+
+    constructor(team1, points1, team2, points2){
+        this.team1 = team1
+        this.points1 = points1
+        this.team2 = team2
+        this.points2 = points2
+    }
+}
+    
+let games = [];
+
+let game = new GameScore("Boston Celtics", 116, "LA Lakers", 112)
+games.push(game)
+
+game = new GameScore("San Antonio Spurs", 128, "Detroit Pistons", 96)
+games.push(game)
+
+game = new GameScore("Houston Rockets", 124, "Indiana Pacers", 119)
+games.push(game)
+
+game = new GameScore("Dallas Mavericks", 117, "New York Knicks", 115)
+games.push(game)
+
+
+console.log('\nGame Scores\n\n');
+
+console.log('Here are the scores printed from an array: ')
+console.log('===============================================')
+
+for(let i = 0; i < games.length; i++){
+    console.log('Team: ' + games[i].team1)
+    console.log('Score: ' + games[i].points1 + '\n')
+
+    console.log('Team: ' + games[i].team2)
+    console.log('Score: ' + games[i].points2 + '\n')
+
+    console.log('===============================================')
+}

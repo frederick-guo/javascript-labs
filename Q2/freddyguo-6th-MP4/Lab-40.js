@@ -1,7 +1,7 @@
 function printMatrix(matrix){
     for(let r = 0; r < matrix.length; r++){
         for(let c = 0; c < matrix[r].length; c++){
-            process.stdout.write(matrix[r][c] + ' ')
+            process.stdout.write(matrix[r][c] + ' ') //so that a newline won't be generated
         }
         console.log()
     }

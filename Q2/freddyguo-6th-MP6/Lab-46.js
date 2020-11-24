@@ -1,6 +1,3 @@
-Lab-44:
-
-
 function printBoard(board){
     for(let r = 0; r < board.length; r++){
         for(let c = 0; c < board[r].length; c++){
@@ -58,109 +55,18 @@ function isWinner(player, board){
     return false
 }
 
-const board1 = [ ['X', 'O', 'X'], ['X', 'X', 'O'], ['O', 'O', 'X'] ]
-				       
-const board2 = [ ['X', 'O', 'O'], ['O', 'X', 'O'], ['X', 'X', 'O'] ]
-
-const board3 = [ ['X', 'O', 'X'], ['X', 'X', 'O'], ['O', 'O', 'O'] ]
-
-console.log()
-
-printBoard(board1)
-console.log()
-if(isWinner('X',board1)){
-    console.log('X is the winner on board1')
-}
-else if(isWinner('O',board1)){
-    console.log('O is the winner on board1')
-}
-else{
-    console.log('There is no winner on board1. Cat\'s game!!!')
-}
-console.log()
-
-printBoard(board2)
-console.log()
-if(isWinner('X',board2)){
-    console.log('X is the winner on board2')
-}
-else if(isWinner('O',board2)){
-    console.log('O is the winner on board2')
-}
-else{
-    console.log('There is no winner on board2. Cat\'s game!!!')
-}
-console.log()
-
-printBoard(board3)
-console.log()
-if(isWinner('X',board3)){
-    console.log('X is the winner on board3')
-}
-else if(isWinner('O',board3)){
-    console.log('O is the winner on board3')
-}
-else{
-    console.log('There is no winner on board3. Cat\'s game!!!')
-}
-
-
-
-Lab-45:
-
-
-function printBoard(board){
-    for(let r = 0; r < board.length; r++){
-        for(let c = 0; c < board[r].length; c++){
-            process.stdout.write(board[r][c] + ' ') 
-        }
-        console.log()
+function isSpotAvaliable(board, row, col){
+    if(!(isPlayerInRange(board,row,col))){
+        return false
     }
+    if(board[row-1][col-1] === 'X' || board[row-1][col-1] === 'O'){
+        return false
+    }
+    return true
 }
 
-function isWinnerHorizontally(player, board){
-    for(let i = 0; i < board.length; i++){
-        if(player === board[i][0] && player === board[i][1] && player === board[i][2]){
-            return true;
-        }
-    }
-    return false;
-}
-
-function isWinnerVertically(player,board){
-    for(let i = 0; i < board.length; i++){
-        if(player === board[0][i] && player === board[1][i] && player === board[2][i]){
-            return true;
-        }
-    }
-    return false;
-}
-
-function isWinnerOnDiagonal1(player, board){
-    if(player === board[0][0] && player === board[1][1] && player === board[2][2]){
-        return true;
-    }
-    return false;
-}
-
-function isWinnerOnDiagonal2(player, board){
-    if(player === board[0][2] && player === board[1][1] && player === board[2][0]){
-        return true;
-    }
-    return false;
-}
-
-function isWinner(player, board){
-    if(isWinnerHorizontally(player,board)){
-        return true
-    }
-    if(isWinnerVertically(player,board)){
-        return true
-    }
-    if(isWinnerOnDiagonal1(player,board)){
-        return true
-    }
-    if(isWinnerOnDiagonal2(player,board)){
+function isPlayerInRange(board, row, col){
+    if(row - 1 < board.length && col - 1 < board.length){
         return true
     }
     return false
@@ -178,14 +84,27 @@ while (true){
     printBoard(board)
 
     while (true){
-        console.log('Player X\'s turn')
+
+        console.log('\nPlayer X\'s turn\n')
+       
         let row = Number(readline.question("Enter your row to play on (1,2,3): "))
         let col = Number(readline.question("Enter your col to play on (1,2,3): "))
+
+        while(true){
+            if(isSpotAvaliable(board,row,col) && isPlayerInRange(board,row,col)){
+                break;
+            }
+            console.log('\nError. Please try again.\n')
+            row = Number(readline.question("Enter your row to play on (1,2,3): "))
+            col = Number(readline.question("Enter your col to play on (1,2,3): "))
+        }
+
         row = row - 1;
         col = col - 1;
 
         board[row][col] = 'X'
         printBoard(board)
+        console.log()
 
         if(isWinner("X", board)){
             console.log('X is the winner')
@@ -197,6 +116,16 @@ while (true){
         console.log('Player O\'s turn')
         row = Number(readline.question("Enter your row to play on (1,2,3): "))
         col = Number(readline.question("Enter your col to play on (1,2,3): "))
+
+        while(true){
+            if(isSpotAvaliable(board,row,col) && isPlayerInRange(board,row,col)){
+                break;
+            }
+            console.log('\nError. Please try again.\n')
+            row = Number(readline.question("Enter your row to play on (1,2,3): "))
+            col = Number(readline.question("Enter your col to play on (1,2,3): "))
+        }
+        
         row = row - 1;
         col = col - 1;
 
@@ -209,9 +138,9 @@ while (true){
             break;
         }
 
-        console.log()
-        console.log()
+    
     }
+    console.log()
     console.log()
     console.log()
     let playAgain = readline.question("Would you like to play another game? (y or n) ")

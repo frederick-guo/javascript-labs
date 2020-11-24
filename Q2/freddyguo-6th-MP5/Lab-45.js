@@ -91,6 +91,7 @@ while (true){
 
         board[row][col] = 'O'
         printBoard(board)
+        console.log()
 
         if(isWinner("O", board)){
             console.log('O is the winner')

@@ -1,0 +1,326 @@
+Lab-46:
+
+
+function printBoard(board){
+    for(let r = 0; r < board.length; r++){
+        for(let c = 0; c < board[r].length; c++){
+            process.stdout.write(board[r][c] + ' ') 
+        }
+        console.log()
+    }
+}
+
+function isWinnerHorizontally(player, board){
+    for(let i = 0; i < board.length; i++){
+        if(player === board[i][0] && player === board[i][1] && player === board[i][2]){
+            return true;
+        }
+    }
+    return false;
+}
+
+function isWinnerVertically(player,board){
+    for(let i = 0; i < board.length; i++){
+        if(player === board[0][i] && player === board[1][i] && player === board[2][i]){
+            return true;
+        }
+    }
+    return false;
+}
+
+function isWinnerOnDiagonal1(player, board){
+    if(player === board[0][0] && player === board[1][1] && player === board[2][2]){
+        return true;
+    }
+    return false;
+}
+
+function isWinnerOnDiagonal2(player, board){
+    if(player === board[0][2] && player === board[1][1] && player === board[2][0]){
+        return true;
+    }
+    return false;
+}
+
+function isWinner(player, board){
+    if(isWinnerHorizontally(player,board)){
+        return true
+    }
+    if(isWinnerVertically(player,board)){
+        return true
+    }
+    if(isWinnerOnDiagonal1(player,board)){
+        return true
+    }
+    if(isWinnerOnDiagonal2(player,board)){
+        return true
+    }
+    return false
+}
+
+function isSpotAvaliable(board, row, col){
+    if(!(isPlayerInRange(board,row,col))){
+        return false
+    }
+    if(board[row-1][col-1] === 'X' || board[row-1][col-1] === 'O'){
+        return false
+    }
+    return true
+}
+
+function isPlayerInRange(board, row, col){
+    if(row - 1 < board.length && col - 1 < board.length){
+        return true
+    }
+    return false
+}
+
+
+console.log('Tic-Tac-Toe')
+console.log()
+console.log()
+
+const readline = require('readline-sync');
+
+while (true){
+    let board = [ ['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-'] ]
+    printBoard(board)
+
+    while (true){
+
+        console.log('\nPlayer X\'s turn\n')
+       
+        let row = Number(readline.question("Enter your row to play on (1,2,3): "))
+        let col = Number(readline.question("Enter your col to play on (1,2,3): "))
+
+        while(true){
+            if(isSpotAvaliable(board,row,col) && isPlayerInRange(board,row,col)){
+                break;
+            }
+            console.log('\nError. Please try again.\n')
+            row = Number(readline.question("Enter your row to play on (1,2,3): "))
+            col = Number(readline.question("Enter your col to play on (1,2,3): "))
+        }
+
+        row = row - 1;
+        col = col - 1;
+
+        board[row][col] = 'X'
+        printBoard(board)
+        console.log()
+
+        if(isWinner("X", board)){
+            console.log('X is the winner')
+            break;
+        }
+
+        console.log()
+
+        console.log('Player O\'s turn')
+        row = Number(readline.question("Enter your row to play on (1,2,3): "))
+        col = Number(readline.question("Enter your col to play on (1,2,3): "))
+
+        while(true){
+            if(isSpotAvaliable(board,row,col) && isPlayerInRange(board,row,col)){
+                break;
+            }
+            console.log('\nError. Please try again.\n')
+            row = Number(readline.question("Enter your row to play on (1,2,3): "))
+            col = Number(readline.question("Enter your col to play on (1,2,3): "))
+        }
+        
+        row = row - 1;
+        col = col - 1;
+
+        board[row][col] = 'O'
+        printBoard(board)
+        console.log()
+
+        if(isWinner("O", board)){
+            console.log('O is the winner')
+            break;
+        }
+
+    
+    }
+    console.log()
+    console.log()
+    console.log()
+    let playAgain = readline.question("Would you like to play another game? (y or n) ")
+    if (playAgain === "n"){
+        break;
+    }
+
+}
+
+console.log()
+console.log()
+console.log("Thank you for playing Tic-Tac-Toe.  I hope that you had fun!")
+
+
+
+
+Lab-47:
+
+
+function printBoard(board){
+    for(let r = 0; r < board.length; r++){
+        for(let c = 0; c < board[r].length; c++){
+            process.stdout.write(board[r][c] + ' ') 
+        }
+        console.log()
+    }
+}
+
+function copyBoard(board){
+    let newBoard = []
+    for(let r = 0; r < board.length; r++){
+        let newRow = []
+        for(let c = 0; c < board[r].length; c++){
+            newRow.push(board[r][c])
+        }
+        newBoard.push(newRow)
+    }
+    return newBoard
+}
+
+function moveDestroyersDown(board){
+    let lastRow = board.length - 1;
+    for(let c = 0; c < board[lastRow].length; c++){
+        if(board[lastRow][c] != '*'){
+            board[lastRow][c] = ' '
+        }
+    }
+
+    let shipIsHit = false
+
+    for(let r = board.length - 2; r >= 0; r--){
+        for(let c = 0; c < board[r].length; c++){
+            if(board[r][c] === 'D'){
+                if(board[r+1][c] === '*'){
+                    shipIsHit = true
+                }
+                board[r][c] = ' '
+                board[r+1][c] = 'D'
+            }
+           // printBoard(board) 
+        }
+    }
+
+    return shipIsHit
+}
+
+
+const readline = require('readline-sync');
+
+let row0 = ['D', ' ', 'D', ' ', 'D' , 'D', 'D', ' ']
+let row1 = ['D', ' ', ' ', ' ', ' ' , 'D', ' ', ' ']
+let row2 = ['D', ' ', 'D', ' ', ' ' , 'D', ' ', ' ']
+let row3 = [' ', ' ', ' ', ' ', ' ' , 'D', ' ', 'D']
+let row4 = [' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ']
+let row5 = [' ', 'D', ' ', 'D', 'D' , ' ', ' ', ' ']
+let row6 = [' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ']
+let row7 = [' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ']
+let row8 = [' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ']
+let row9 = [' ', ' ', ' ', '*', ' ' , ' ', ' ', ' ']
+
+board = []
+board.push(row0)
+board.push(row1)
+board.push(row2)
+board.push(row3)
+board.push(row4)
+board.push(row5)
+board.push(row6)
+board.push(row7)
+board.push(row8)
+board.push(row9)
+
+let originalBoard = copyBoard(board)
+
+let shipRow = 9
+let shipCol = 3
+
+console.log('Battle Ship')
+console.log()
+console.log()
+
+while (true){
+    // create a board for this came and reset it back to the beginning
+    board = copyBoard(originalBoard)
+
+    // reset the ship's coordinates shipRow and shipCol
+    shipRow = 9
+    shipCol = 3
+
+    // print the baord
+    printBoard(board)
+
+    while (true){
+
+        console.log('You can move left (l), up (u), right (r), none (n), or quit (q)')
+        let move = readline.question("Enter how to move (l, u, r, n, q): ")
+
+        if (move === 'l'){
+            board[shipRow][shipCol] = ' '
+            shipCol = shipCol - 1
+            if (board[shipRow][shipCol] === 'D'){
+                console.log('You lose!!!')
+                break;
+            }
+            board[shipRow][shipCol] = '*'
+        }
+        else if (move === 'u'){
+            board[shipRow][shipCol] = ' '
+            shipRow = shipRow - 1
+            if (board[shipRow][shipCol] === 'D'){
+                console.log('You lose!!!')
+                break;
+            }
+            board[shipRow][shipCol] = '*'
+        }
+        else if (move === 'r'){
+            board[shipRow][shipCol] = ' '
+            shipCol = shipCol + 1
+            if (board[shipRow][shipCol] === 'D'){
+                console.log('You lose!!!')
+                break;
+            }
+            board[shipRow][shipCol] = '*'
+        }
+        else if (move === 'q'){
+            break;
+        }
+
+        // move destroyers down
+        let shipIsHit1 = moveDestroyersDown(board)
+        //printBoard(board)
+        // see if ship got hit
+        if (shipIsHit1 === true){
+            console.log('You lose!!!')
+            break;
+        }
+
+
+        // print new board!!!!!!
+        printBoard(board)
+
+        if (shipRow === 0){
+            console.log('You win!!! Great job!!!')
+            break;
+        }
+
+        console.log()
+        console.log()
+    }
+    console.log()
+    console.log() 
+    let playAgain = readline.question("Would you like to play another game? (y or n) ")
+    if (playAgain === "n"){
+        break;
+    }
+}
+
+console.log()
+console.log()
+console.log('Thank you for playing Battle Ship.  I hope that you had fun!')
